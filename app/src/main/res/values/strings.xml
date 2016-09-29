@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Practica1</string>
+    <string name="auth_name">Nombre</string>
+    <string name="auth_hint_user">Escriba su usuario</string>
+    <string name="auth_pass">Clave</string>
+    <string name="auth_ip">Dirección IP</string>
+    <string name="auth_hint_pass">Escriba su clave</string>
+    <string name="auth_hint_ip">Dirección del servidor</string>
+    <string name="auth_port">Puerto</string>
+    <string name="ath_hint_port">puerto destino</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
