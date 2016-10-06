@@ -63,7 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/auth_edit_ip"
-        android:layout_alignStart="@+id/auth_label_ip">
+        android:layout_alignStart="@+id/auth_label_ip"
+        android:id="@+id/linearLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,4 +81,13 @@
             android:hint="@string/ath_hint_port"
             android:inputType="number" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auth_enviar"
+        android:id="@+id/auth_button_send"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

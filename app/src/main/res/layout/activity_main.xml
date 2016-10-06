@@ -21,7 +21,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
         android:id="@+id/main_frame"
-        android:background="@android:color/holo_blue_bright"></FrameLayout>
+        android:background="@android:color/holo_blue_bright"
+        android:layout_below="@+id/textView"></FrameLayout>
+
 </RelativeLayout>
