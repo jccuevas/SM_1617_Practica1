@@ -32,9 +32,15 @@ public class Autenticacion{
     public String getUser(){
         return mUser;
     }
+    public String getPas(){
+        return mPass;
+    }
 
     public void setUser(String user){
         mUser=user;
+    }
+    public void setPass(String pass){
+        mPass=pass;
     }
 
 }

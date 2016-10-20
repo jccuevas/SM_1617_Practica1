@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -28,10 +27,13 @@ public class AuthFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mUser="";
-    private String mPass="";
+    private String mUser = "";
+    private String mPass = "";
 
-    private EditText mEditUser=null;
+    private Autenticacion mAutentica = new Autenticacion("", "", "", 0);
+
+    private EditText mEditUser = null;
+    private EditText mEditPass = null;
 
 
     public AuthFragment() {
@@ -59,43 +61,66 @@ public class AuthFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mUser = getArguments().getString(ARG_PARAM1);
-            mPass = getArguments().getString(ARG_PARAM2);
-        }
+        if (savedInstanceState == null)
+            if (getArguments() != null) {
+                mUser = getArguments().getString(ARG_PARAM1);
+                mPass = getArguments().getString(ARG_PARAM2);
+                mAutentica.setUser(mUser);
+                mAutentica.setPass(mPass);
+            }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if (savedInstanceState != null) {
+            Toast.makeText(getActivity(), "Cambio de configuración", Toast.LENGTH_SHORT).show();
+            mAutentica.setUser(savedInstanceState.getString(ARG_PARAM1));
+        }
         // Inflate the layout for this fragment
         View fragmento = inflater.inflate(R.layout.fragment_auth, container, false);
 
-        mEditUser = (EditText)fragmento.findViewById(R.id.auth_edit_user);
-        EditText pass = (EditText)fragmento.findViewById(R.id.auth_edit_pass);
+        redibuja(fragmento);
 
-        mEditUser.setText(mUser);
-        pass.setText(mPass);
-
-        Button boton = (Button)fragmento.findViewById(R.id.auth_button_send);
+        Button boton = (Button) fragmento.findViewById(R.id.auth_button_send);
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombre = mEditUser.getText().toString();
-                Autenticacion datos = new Autenticacion(nombre,null,null,0);
-                Toast.makeText(getActivity(), "Nombre "+datos.getUser(), Toast.LENGTH_SHORT).show();
+                //String pass = mEditPass.getText().toString();
+                //String user = mEditUser.getText().toString();
+                //mAutentica = new Autenticacion(user,pass,null,0);
+                Toast.makeText(getActivity(), "Nombre " + mAutentica.getUser(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
         return fragmento;
 
     }
 
 
+    private void redibuja(View fragmento) {
 
+        mEditUser = (EditText) fragmento.findViewById(R.id.auth_edit_user);
+        mEditPass = (EditText) fragmento.findViewById(R.id.auth_edit_pass);
+        mEditUser.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                mAutentica.setUser(mEditUser.getEditableText().toString());
+            }
+        });
 
+        mEditUser.setText(mAutentica.getUser());
+        mEditPass.setText(mAutentica.getPas());
 
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(ARG_PARAM1, mAutentica.getUser());
+    }
 }
